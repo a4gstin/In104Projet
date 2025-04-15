@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAX_USERS 100
+//#define NB_USERS
 
 // Structure to hold user data
 typedef struct {
@@ -32,7 +33,16 @@ void readFromFile(const char *filename) {
     }
     printf("Reading users from file...\n");
 
-    // TODO: Continue the implementation...
+    // TODO:
+    int NB_USERS ;
+    fscanf("%d", &NB_USERS) ;
+    for (int i=0; i<NB_USERS; i++){
+        char* name;
+        fscanf("%c",&name) ;
+        User user ;
+        user.name = name ;
+        users[i] = user ;
+    }
 
     fclose(file);
 }
@@ -44,6 +54,9 @@ int main() {
     readFromFile("social_network.txt");
 	
     // TODO: Continue the implementation...
+
+    
+    printf("%c",users[0]) ;
 
     return 0;
 }
