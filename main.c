@@ -35,13 +35,18 @@ void readFromFile(const char *filename) {
 
     // TODO:
     int NB_USERS ;
-    fscanf("%d", &NB_USERS) ;
+    fscanf(file, "%d", &NB_USERS) ;
     for (int i=0; i<NB_USERS; i++){
-        char* name;
-        fscanf("%c",&name) ;
-        User user ;
-        user.name = name ;
-        users[i] = user ;
+        char name[20];
+        fscanf(file, "%s", name) ;
+        User add_user ;
+        
+        int len = strlen(name) ;
+        for (int i=0 ; i<len; i++){
+            add_user.name[i] = name[i] ;
+        }
+
+        users[i] = add_user ;
     }
 
     fclose(file);
@@ -55,8 +60,6 @@ int main() {
 	
     // TODO: Continue the implementation...
 
-    
-    printf("%c",users[0]) ;
 
     return 0;
 }
