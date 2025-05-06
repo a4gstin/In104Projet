@@ -14,7 +14,7 @@ extern User users[MAX_USERS];
 extern int adjacencyMatrix[MAX_USERS][MAX_USERS];
 extern int userCount;
 
-// Declare functions from p1.c that we'll use
+// Declare functions from p1.c that we'll use for the example of the main
 int findUserIndex(const char* name);
 void initializeGraph();
 int findShortestPath(int start, int end, int* path);

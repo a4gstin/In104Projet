@@ -37,6 +37,7 @@ void printPath(int* path, int length) {
     printf("\n");
 }
 
+// 1. Implement function to initialize the Adjacency Matrix for the Graph
 void initializeGraph() {
     for (int i = 0; i < MAX_USERS; i++) {
         for (int j = 0; j < i; j++) {
@@ -46,6 +47,7 @@ void initializeGraph() {
     }
 }
 
+// 2. Implement function to add a new user in the social network with his friendship data
 void addUserWithFriendships(const char* name, int friendCount, const char** friendNames, const int* strengths) {
     if (userCount >= MAX_USERS) return;
     
