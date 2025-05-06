@@ -33,7 +33,7 @@ void readFromFile(const char *filename) {
     }
     printf("Reading users from file...\n");
 
-    // TODO:
+    // Add users
     int NB_USERS ;
     fscanf(file, "%d", &NB_USERS) ;
     for (int i=0; i<NB_USERS; i++){
@@ -42,11 +42,22 @@ void readFromFile(const char *filename) {
         User add_user ;
         
         int len = strlen(name) ;
-        for (int i=0 ; i<len; i++){
-            add_user.name[i] = name[i] ;
+        for (int j=0 ; j<len; j++){
+            add_user.name[j] = name[j] ;
         }
-
         users[i] = add_user ;
+    }
+
+    // Add user's friendship in the matrix
+    int NB_USERS_FRIENDSHIP ;
+    fscanf(file, "%d", &NB_USERS_FRIENDSHIP) ;
+    for (int i=0; i<NB_USERS_FRIENDSHIP; i++){
+        int friend1 ;
+        int friend2 ;
+        int friendship_strenght ;
+        fscanf(file, "%d %d %d", &friend1, &friend2, &friendship_strenght) ;
+        adjacencyMatrix[friend1][friend2] = friendship_strenght ;
+        adjacencyMatrix[friend2][friend1] = friendship_strenght ;
     }
 
     fclose(file);

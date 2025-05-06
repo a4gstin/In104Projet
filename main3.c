@@ -21,30 +21,41 @@ int findShortestPath(int start, int end, int* path);
 void printPath(int* path, int length);
 
 void readFromFile(const char *filename) {
+    
     FILE *file = fopen(filename, "r");
     if (!file) {
         printf("Error opening file!\n");
         return;
     }
+    printf("Reading users from file...\n");
 
-    int NB_USERS;
-    fscanf(file, "%d", &NB_USERS);
-    for (int i = 0; i < NB_USERS && i < MAX_USERS; i++) {
-        fscanf(file, "%49s", users[i].name);  // Limit input to prevent buffer overflow
-        users[i].index = i;
-        userCount++;
-    }
-
-    char name1[50], name2[50];
-    int strength;
-    while (fscanf(file, "%49s %49s %d", name1, name2, &strength) == 3) {
-        int idx1 = findUserIndex(name1);
-        int idx2 = findUserIndex(name2);
-        if (idx1 != -1 && idx2 != -1) {
-            adjacencyMatrix[idx1][idx2] = strength;
-            adjacencyMatrix[idx2][idx1] = strength;
+    // Add users
+    int NB_USERS ;
+    fscanf(file, "%d", &NB_USERS) ;
+    for (int i=0; i<NB_USERS; i++){
+        char name[20];
+        fscanf(file, "%s", name) ;
+        User add_user ;
+        
+        int len = strlen(name) ;
+        for (int j=0 ; j<len; j++){
+            add_user.name[j] = name[j] ;
         }
+        users[i] = add_user ;
     }
+
+    // Add user's friendship in the matrix
+    int NB_USERS_FRIENDSHIP ;
+    fscanf(file, "%d", &NB_USERS_FRIENDSHIP) ;
+    for (int i=0; i<NB_USERS_FRIENDSHIP; i++){
+        int friend1 ;
+        int friend2 ;
+        int friendship_strenght ;
+        fscanf(file, "%d %d %d", &friend1, &friend2, &friendship_strenght) ;
+        adjacencyMatrix[friend1][friend2] = friendship_strenght ;
+        adjacencyMatrix[friend2][friend1] = friendship_strenght ;
+    }
+
     fclose(file);
 }
 

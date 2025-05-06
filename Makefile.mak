@@ -4,7 +4,7 @@ LDFLAGS =
 
 TARGET = noperc 
 
-SRCS = main.c p1.c 
+SRCS = main2.c p1.c 
 OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)
