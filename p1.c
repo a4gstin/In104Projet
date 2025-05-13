@@ -66,7 +66,7 @@ void addUserWithFriendships(const char* name, int friendCount, const char** frie
     }
 }
 
-// 3. Implement function to remove users
+//6. Implement function to remove users
 void removeUser(const char* name) {
     int index = findUserIndex(name);
     if (index == -1) {
@@ -80,13 +80,13 @@ void removeUser(const char* name) {
         adjacencyMatrix[index][i] = NO_CONNECTION;
     }
     
-    // Shift users array
+    // Modify list users
     for (int i = index; i < userCount - 1; i++) {
         users[i] = users[i + 1];
         users[i].index = i;
     }
     
-    // Shift adjacency matrix
+    // Modify the adjacency matrix (changing the size)
     for (int i = 0; i < userCount; i++) {
         for (int j = index; j < userCount - 1; j++) {
             adjacencyMatrix[i][j] = adjacencyMatrix[i][j + 1];
@@ -120,7 +120,7 @@ void modifyFriendship(const char* name1, const char* name2, int strength) {
 int findShortestPath(int start, int end, int* path) {
     if (start == end) {
         path[0] = start;
-        return 1;
+        return -1;
     }
     
     int visited[MAX_USERS] = {0};
@@ -165,5 +165,6 @@ int findShortestPath(int start, int end, int* path) {
         }
     }
     
-    return 0; // No path found
+    return -1; // No path found
 }
+

@@ -19,4 +19,6 @@ void modifyFriendship(const char* name1, const char* name2, int strength) ;
 
 int findShortestPath(int start, int end, int* path) ;
 
+void removeUser(const char* name) ;
+
 #endif

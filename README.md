@@ -1,6 +1,6 @@
 # In104Projet
 
-Le projet est structuré au tour du fichier p1.c qui comprend les fonctions demandées dans la fiche du projet.
+Le projet est structuré au tour du fichier p1.c qui comprend les fonctions demandées dans la fiche du projet. Ce fichier p1.c est associé au fichier p1.h où on déclare les fonctions codées dans p1.c
 
 A ce stade, nous avons codé dans ce fichier :
 

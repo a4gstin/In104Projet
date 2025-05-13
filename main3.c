@@ -62,13 +62,30 @@ int main() {
     initializeGraph();
     readFromFile("social_network.txt");
 
-    printf("%d",adjacencyMatrix[0][2]) ;
     // Example usage
     int path[MAX_USERS];
     int length = findShortestPath(0, 2, path);
     if (length > 0) {
         printf("Shortest path: ");
         printPath(path, length);
+    } else {
+        printf("No path found.\n");
+    }
+
+    int path_avant[MAX_USERS];
+    int avant = findShortestPath(0, 5, path_avant);
+    if (avant > 0) {
+        printf("Shortest path (lenght = %d): ", avant);
+        printPath(path_avant, avant);
+    } else {
+        printf("No path found.\n");
+    }
+    removeUser(users[2].name) ;
+    int path_apres[MAX_USERS];
+    int apres = findShortestPath(0, 5, path_apres);
+    if (apres > 0) {
+        printf("Shortest path (lenght = %d): ", apres);
+        printPath(path_apres, apres);
     } else {
         printf("No path found.\n");
     }
