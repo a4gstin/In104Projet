@@ -17,12 +17,7 @@ extern User users[MAX_USERS];
 extern int adjacencyMatrix[MAX_USERS][MAX_USERS];
 extern int userCount;
 
-// Declare functions from p1.c that we'll use for the example of the main
-int findUserIndex(const char* name);
-void initializeGraph();
-int findShortestPath(int start, int end, int* path);
-void printPath(int* path, int length);
-
+// Function which is filling the list users and the adjacencyMatrix with the .txt 
 void readFromFile(const char *filename) {
     
     FILE *file = fopen(filename, "r");
@@ -35,6 +30,7 @@ void readFromFile(const char *filename) {
     // Add users
     int NB_USERS ;
     fscanf(file, "%d", &NB_USERS) ;
+    userCount = NB_USERS ;
     for (int i=0; i<NB_USERS; i++){
         char name[20];
         fscanf(file, "%s", name) ;
@@ -66,6 +62,7 @@ int main() {
     initializeGraph();
     readFromFile("social_network.txt");
 
+    printf("%d",adjacencyMatrix[0][2]) ;
     // Example usage
     int path[MAX_USERS];
     int length = findShortestPath(0, 2, path);
