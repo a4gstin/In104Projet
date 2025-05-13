@@ -14,7 +14,7 @@ Nous avons commencé le codage d'autres fonctions mais que nous n'avons pas fini
 
 Nous avons mis à jour le fichier main.c fourni en main3.c pour qu'il soit cohérent avec p1.c avec un exemple d'utilisation des fonctions que nous avons codées.
 
-Nous avons enfin rédigé un Makefile pour compiler le tout.
+Nous avons enfin rédigé un Makefile pour compiler le tout (il faut utiliser la commande "chmod +x ./main3.c" pour obtenir la permission de compiler, si celle-ci n'est pas accordée)
 
 Nous prévoyons dans la suite de :
     finaliser les fonctions requises dans la description du projet
