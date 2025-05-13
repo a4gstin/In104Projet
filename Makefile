@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
-LDFLAGS =
+CFLAGS = -Wall -Werror -Wfatal-errors
+LDFLAGS = -lm
 
 TARGET = noperc
 
@@ -16,6 +16,6 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f *~ *.o
 
 .PHONY: all clean
