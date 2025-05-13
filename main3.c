@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Import the file p1.h where we declare the functions coded in p1.c
+#include "p1.h"
+
 // Forward declarations and constants
 #define MAX_USERS 100
 typedef struct {

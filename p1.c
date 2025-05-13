@@ -4,6 +4,8 @@
 #include <limits.h>
 #include <stdbool.h>
 
+#include "p1.h"
+
 #define MAX_USERS 100
 #define NO_CONNECTION 0
 
