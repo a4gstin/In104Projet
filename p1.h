@@ -5,20 +5,30 @@
 
 // Declaration of the functions we are coding in p1.c
 
-int findUserIndex(const char* name) ;
+int findUserIndex(const char* name) ; //A
 
-void printPath(int* path, int length) ;
+void printPath(int* path, int length) ; //B
 
-void initializeGraph() ;
+int findFriendshipStrength (const char* name1, const char* name2) ; //C
 
-void addUserWithFriendships(const char* name, int friendCount, const char** friendNames, const int* strengths) ;
+void removeFriendship (const char* user, const char* friend) ; //D
 
-void removeUser(const char* name) ;
+void addFriendship (const char* user, const char* friend, int strength) ; //E
 
-void modifyFriendship(const char* name1, const char* name2, int strength) ;
+void initializeGraph() ; //1
 
-int findShortestPath(int start, int end, int* path) ;
+void addUserWithFriendships(const char* name, int friendCount, const char** friendNames, const int* strengths) ; //2
 
-void removeUser(const char* name) ;
+void removeUser(const char* name) ; //3
+
+void modifyFriendship(const char* name1, const char* name2, int strength) ; //4
+
+int findShortestPath(const char* name1, const char* name2, int* path) ; //5
+
+void findPotentialFriends(const char* name, int level, int* friends, int* count) ; //6
+
+void exploreAllFriendships(const char* name, int* visited) ; //7
+
+bool hasPath(const char* name1, const char* name2) ; //8
 
 #endif
