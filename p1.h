@@ -31,4 +31,14 @@ void exploreAllFriendships(const char* name, int* visited) ; //7
 
 bool hasPath(const char* name1, const char* name2) ; //8
 
+void dijkstraWeakestPath(const char* name1, const char* name2) ; //9
+
+void aStarWeakestPath(const char* name1, const char* name2) ; //10
+
+void dfsForComponents(const char* user, int* visited, int* component, int componentId) ; //11
+
+void findConnectedComponents() ; //11
+
+void orderUsersByFriendCount() ; //12
+
 #endif
