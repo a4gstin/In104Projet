@@ -11,6 +11,8 @@
 typedef struct {
     char name[50];
     int index;
+    char* bio;
+    char* school;
 } User;
 
 // Declare global variables as extern
@@ -75,18 +77,19 @@ int main() {
     printf("Welcome %s!\n", users[userIndex].name);
     printf("\n");
     printf("\n");
-    printf("what do you want to do?\n");
-    printf("\n");
-    printf("1. See your friends\n");
-    printf("2. Add a friend\n");
-    printf("3. Remove a friend\n");
-    printf("4. Modify friendship strength\n");
 
-    printf("Enter the right number:\n");
-    int choice;
-    scanf("%d", &choice);
     int exit1=0;
     while (exit1 !=1){
+        printf("what do you want to do?\n");
+        printf("\n");
+        printf("1. See your friends\n");
+        printf("2. Search a Friend\n");
+        printf("3. My page\n");
+        printf("4. Exit\n");
+
+        printf("Enter the right number:\n");
+        int choice;
+        scanf("%d", &choice);
         if (choice == 1) {
             int exit2=0;
             while (exit2 !=1){
@@ -197,7 +200,10 @@ int main() {
                 printf("1. Filtre\n");
                 printf("2. Add Friend\n");
                 printf("3. Remove Friend\n");
-                printf("4. Exit\n");
+                printf("4. Trouver des amis potentiels\n");
+                printf("5. Exit\n");
+
+                printf("Enter the right number:\n");
                 printf("\n");
 
                 for(int i=0; i<70; i++){
@@ -345,31 +351,129 @@ int main() {
                     scanf("%s", friendName);
                     removeUser(friendName);
                 }
-                else if (choice2 == 4) {
+                else if (choice2 == 5) {
                     printf("Exiting...\n");
                     exit2 = 1;
+                }
+                else if (choice2 == 4) {
+                    for(int i=0; i<70; i++){
+                    printf("=") ;
+                    }
+                    printf("\n");
+                    int* friends = NULL;
+                    int* count = 0;
+                    findPotentialFriends(users[userIndex].name, 2, &friends, &count);
+                    if (count > 0) {
+                        printf("Potential friends:\n");
+                        for (int i = 0; i < count; i++) {
+                            printf("%s\n", users[friends[i]].name);
+                        }
+                        free(friends);
+                    } else {
+                        printf("No potential friends found.\n");
+                    }
+                    for(int i=0; i<70; i++){
+                    printf("=") ;
+                    }
+                    printf("\n");
+                } 
+                else {
+                    printf("Invalid choice.\n");
+                }
+            }
+        }
+
+        else if (choice == 3) {
+            int exit2=0;
+            while(exit2 !=1){
+                for(int i=0; i<70; i++){
+                    printf("*") ;
+                }
+                printf("\n");
+                printf("Your page:\n");
+                int* friends;
+                int* count = 0;
+                printf("Name: %s               Friends: %d          Strength: %f/n", users[userIndex].name, findPotentialFriends(users[userIndex].name,1,&friends,&count), findAverageFriendshipStrength(users[userIndex].name));
+                printf("Bio: %s\n", users[userIndex].bio ? users[userIndex].bio : "No bio available");
+                printf("School: %s\n", users[userIndex].school ? users[userIndex].school : "No school information available");
+                printf("\n");
+
+                printf("1.Modifier mon Pseudo\n");
+                printf("2. Modifier la BIO:\n");
+                printf("3. Modifier l'école:\n");
+                printf("4.Exit\n");
+                
+                for(int i=0; i<70; i++){
+                    printf("*") ;
+                }
+                printf("\n");
+
+                printf("Enter the right number:\n");
+                int choice2;
+                scanf("%d", &choice2);
+
+                if (choice2 == 1) {
+                     for(int i=0; i<70; i++){
+                    printf("=") ;
+                    }
+                    char newName[50];
+                    printf("Enter your new name:\n");
+                    scanf("%s", newName);
+                    strcpy(users[userIndex].name, newName);
+                    printf("Name changed to %s\n", users[userIndex].name);
+                    for(int i=0; i<70; i++){
+                    printf("=") ;
+                }
+                } else if (choice2 == 2) {
+                     for(int i=0; i<70; i++){
+                    printf("=") ;
+                    }
+                    char newBio[100];
+                    printf("Enter your new bio:\n");
+                    scanf(" %[^\n]", newBio); // Read string with spaces
+                    users[userIndex].bio = malloc(strlen(newBio) + 1);
+                    strcpy(users[userIndex].bio, newBio);
+                    printf("Bio updated.\n");
+                     for(int i=0; i<70; i++){
+                    printf("=") ;
+                    }
+                } else if (choice2 == 3) {
+                     for(int i=0; i<70; i++){
+                    printf("=") ;
+                    }
+                    char newSchool[50];
+                    printf("Enter your new school:\n");
+                    scanf("%s", newSchool);
+                    users[userIndex].school = malloc(strlen(newSchool) + 1);
+                    strcpy(users[userIndex].school, newSchool);
+                    printf("School updated.\n");
+                     for(int i=0; i<70; i++){
+                    printf("=") ;
+                    }
+                } else if (choice2 == 4) {
+                    printf("Exiting...\n");
                 } else {
                     printf("Invalid choice.\n");
                 }
+            }
+        }
 
+        else if (choice == 4) {
+            printf(" Are you sure you want to exit? :( (y/n)\n");
+            char confirm;
+            scanf(" %c", &confirm);
+            if (confirm == 'y' || confirm == 'Y') {
+                printf("Goodbye!\n");
+                exit1 = 1;
+            } else {
+                printf("Continuing...\n");
+            }
 
-
-
-        } else if (choice == 3) {
-
-        } else if (choice == 4) {
-            char friendName[50];
-            int strength;
-            printf("Enter the name of the friend whose friendship strength you want to modify:\n");
-            scanf("%s", friendName);
-            printf("Enter the new strength of the friendship:\n");
-            scanf("%d", &strength);
-            modifyFriendship(users[userIndex].name, friendName, strength);
         } else {
             printf("Invalid choice.\n");
+        }
     }
-
-
+    printf("Exiting the social network...\n");
 
     int path[MAX_USERS];
 
