@@ -90,6 +90,7 @@ int main() {
         printf("Enter the right number:\n");
         int choice;
         scanf("%d", &choice);
+
         if (choice == 1) {
             int exit2=0;
             while (exit2 !=1){
@@ -137,7 +138,7 @@ int main() {
                     } else {
                         printf("Friend not found.\n");
                     }
-                    printf("%d\n",findfriendshipStrength(users[userIndex].name, friendName));
+                    printf("%d\n",findFriendshipStrength(users[userIndex].name, friendName));
                     printd("\n");
                     for(int i=0; i<70; i++){
                     printf("=\n") ;
@@ -165,7 +166,7 @@ int main() {
                     printf("Enter the name of the friend whose friendship strength you want to modify:\n");
                     scanf("%s", friendName);
                     int strength;
-                    printf("%d\n",findfriendshipStrength(users[userIndex].name, friendName));
+                    printf("%d\n",findFriendshipStrength(users[userIndex].name, friendName));
                     printf("Enter the new strength of the friendship:\n");
                     scanf("%d", &strength);
                     modifyFriendship(users[userIndex].name, friendName, strength);
@@ -193,8 +194,9 @@ int main() {
                 printf("\n");
 
                 printf("Voici la liste des personnes du réseau social:\n");
+                int* paths;
                 for (int i = 0; i < userCount; i++) {
-                    printf("Nom : %s, distance de la relation %d\n", users[i].name, findShortestPath(userIndex, i, NULL));
+                    printf("Nom : %s, Distance de la relation, %d\n", users[i].name, findShortestPath(userIndex, i, paths));
                 }
 
                 printf("1. Filtre\n");
@@ -233,12 +235,13 @@ int main() {
                     }
                     printf("\n");
 
+                    printf("Enter the right number:\n");
                     int choice3;
                     scanf("%d", &choice3);
 
                     if(choice3 == 1) {
                         for(int i=0; i<70; i++){
-                            printf("*") ;
+                            printf("=") ;
                             }
                         printf("\n");
                         printf("Friends with strength > 5:\n");
@@ -247,14 +250,14 @@ int main() {
                                 printf("Name : %s, Strenght: %d;\n", users[i].name, findFriendshipStrength(users[userIndex].name, users[i].name));
                             }
                             for(int i=0; i<70; i++){
-                                printf("*") ;
+                                printf("=") ;
                                 }
                             printf("\n");
                         }
                     }
-                    if(choice3 == 2) {
+                    else if(choice3 == 2) {
                         for(int i=0; i<70; i++){
-                            printf("*") ;
+                            printf("=") ;
                             }
                         printf("\n");
                         printf("Friends with strength <= 5:\n");
@@ -263,56 +266,59 @@ int main() {
                                 printf("Name : %s, Strenght: %d;\n", users[i].name, findFriendshipStrength(users[userIndex].name, users[i].name));
                             }
                             for(int i=0; i<70; i++){
-                                printf("*") ;
+                                printf("=") ;
                                 }
                             printf("\n");
                         }
                     } else if (choice3 == 3) {
                         for(int i=0; i<70; i++){
-                            printf("*") ;
+                            printf("=") ;
                             }
                         printf("\n");
                         printf("Strangers with distance < 3:\n");
+                        int* paths2;
                         for (int i = 0; i < userCount; i++) {
-                            if (dijkstraWeakestPath(users[userIndex].name, users[i].name) < 3) {
+
+                            if (findShortestPath(users[userIndex].name, users[i].name, paths2) < 3) {
                                 printf("%s\n", users[i].name);
                             }
                             for(int i=0; i<70; i++){
-                                printf("*") ;
+                                printf("=") ;
                                 }
                             printf("\n");
                         }
                     } else if (choice3 == 4) {
                         for(int i=0; i<70; i++){
-                            printf("*") ;
+                            printf("=") ;
                             }
                         printf("\n");
                         printf("Strangers with distance < 5:\n");
+                        int* paths2;
                         for (int i = 0; i < userCount; i++) {
-                            if (dijkstraWeakestPath(users[userIndex].name, users[i].name) < 5) {
+                            if (findShortestPath(users[userIndex].name, users[i].name,paths2) < 5) {
                                 printf("%s\n", users[i].name);
                             }
                             for(int i=0; i<70; i++){
-                                printf("*") ;
+                                printf("=") ;
                                 }
                             printf("\n");
                         }
                     } else if (choice3 == 5) {
                         for(int i=0; i<70; i++){
-                            printf("*") ;
+                            printf("=") ;
                             }
                         printf("\n");
                         char name[50];
                         printf("Enter the name of the friend you want to find:\n");
                         scanf("%s", name);
-                        int index = findUserIndex(name);
-                        if (index != -1) {
-                            printf("Friend found: %s\n", users[index].name);
+                        int index2 = findUserIndex(name);
+                        if (index2 != -1) {
+                             printf("Name : %s, Strenght: %d;\n", users[index2].name, findFriendshipStrength(users[userIndex].name, users[index2].name));
                         } else {
                             printf("Friend not found.\n");
                         }
                         for(int i=0; i<70; i++){
-                            printf("*") ;
+                            printf("=") ;
                             }
                         printf("\n");
                     }else {
@@ -327,10 +333,8 @@ int main() {
                     char friendName[50];
                     scanf("%s", friendName);
                     int friendIndex = findUserIndex(friendName);
-                    int* friends = NULL;
-                    int count = 0;
-                    findPotentialFriends(users[userIndex].name, friendName, &friends, &count);
-                    if ( &count == 1) {
+                    
+                    if (adjacencyMatrix[userIndex][friendIndex] =! NO_CONNECTION) {
                         printf("Friend already exists.\n");
 
                     } else {
@@ -346,10 +350,19 @@ int main() {
                     printf("\n");
 
                 } else if (choice2 == 3){
+                    for(int i=0; i<70; i++){
+                        printf("=") ;
+                    }
+                    printf("\n");
                     char friendName[50];
                     printf("Enter the name of the friend you want to remove:\n");
                     scanf("%s", friendName);
                     removeUser(friendName);
+                    printf("Friendship with %s removed.\n", friendName);
+                    for(int i=0; i<70; i++){
+                        printf("=") ;
+                    }
+                    printf("\n");
                 }
                 else if (choice2 == 5) {
                     printf("Exiting...\n");
@@ -360,15 +373,14 @@ int main() {
                     printf("=") ;
                     }
                     printf("\n");
-                    int* friends = NULL;
-                    int* count = 0;
+                    int* friends;
+                    int* count;
                     findPotentialFriends(users[userIndex].name, 2, &friends, &count);
-                    if (count > 0) {
+                    if (&count > 0) {
                         printf("Potential friends:\n");
-                        for (int i = 0; i < count; i++) {
+                        for (int i = 0; i < &count; i++) {
                             printf("%s\n", users[friends[i]].name);
                         }
-                        free(friends);
                     } else {
                         printf("No potential friends found.\n");
                     }
@@ -392,7 +404,7 @@ int main() {
                 printf("\n");
                 printf("Your page:\n");
                 int* friends;
-                int* count = 0;
+                int* count;
                 printf("Name: %s               Friends: %d          Strength: %f/n", users[userIndex].name, findPotentialFriends(users[userIndex].name,1,&friends,&count), findAverageFriendshipStrength(users[userIndex].name));
                 printf("Bio: %s\n", users[userIndex].bio ? users[userIndex].bio : "No bio available");
                 printf("School: %s\n", users[userIndex].school ? users[userIndex].school : "No school information available");
@@ -422,36 +434,39 @@ int main() {
                     strcpy(users[userIndex].name, newName);
                     printf("Name changed to %s\n", users[userIndex].name);
                     for(int i=0; i<70; i++){
-                    printf("=") ;
-                }
-                } else if (choice2 == 2) {
-                     for(int i=0; i<70; i++){
-                    printf("=") ;
+                        printf("=") ;
                     }
-                    char newBio[100];
+                } else if (choice2 == 2) {
+                    for(int i=0; i<70; i++){
+                        printf("=") ;
+                    }
+                    char newBio[200];
                     printf("Enter your new bio:\n");
                     scanf(" %[^\n]", newBio); // Read string with spaces
-                    users[userIndex].bio = malloc(strlen(newBio) + 1);
+                    users[userIndex].bio = malloc((strlen(newBio) + 1)*sizeof(char));
                     strcpy(users[userIndex].bio, newBio);
+                    free(users[userIndex].bio);
                     printf("Bio updated.\n");
-                     for(int i=0; i<70; i++){
-                    printf("=") ;
+                    for(int i=0; i<70; i++){
+                        printf("=") ;
                     }
                 } else if (choice2 == 3) {
-                     for(int i=0; i<70; i++){
-                    printf("=") ;
+                    for(int i=0; i<70; i++){
+                        printf("=") ;
                     }
                     char newSchool[50];
                     printf("Enter your new school:\n");
                     scanf("%s", newSchool);
-                    users[userIndex].school = malloc(strlen(newSchool) + 1);
+                    users[userIndex].school = malloc((strlen(newSchool) + 1)*sizeof(char));
                     strcpy(users[userIndex].school, newSchool);
+                    free(users[userIndex].school);
                     printf("School updated.\n");
-                     for(int i=0; i<70; i++){
-                    printf("=") ;
+                    for(int i=0; i<70; i++){
+                        printf("=") ;
                     }
                 } else if (choice2 == 4) {
                     printf("Exiting...\n");
+                    exit2 = 1;
                 } else {
                     printf("Invalid choice.\n");
                 }
@@ -474,34 +489,4 @@ int main() {
         }
     }
     printf("Exiting the social network...\n");
-
-    int path[MAX_USERS];
-
-    int length = findShortestPath(0, 2, path);
-    if (length > 0) {
-        printf("Shortest path: ");
-        printPath(path, length);
-    } else {
-        printf("No path found.\n");
-    }
-
-    int path_avant[MAX_USERS];
-    int avant = findShortestPath(0, 5, path_avant);
-    if (avant > 0) {
-        printf("Shortest path (lenght = %d): ", avant);
-        printPath(path_avant, avant);
-    } else {
-        printf("No path found.\n");
-    }
-    removeUser(users[2].name) ;
-    int path_apres[MAX_USERS];
-    int apres = findShortestPath(0, 5, path_apres);
-    if (apres > 0) {
-        printf("Shortest path (lenght = %d): ", apres);
-        printPath(path_apres, apres);
-    } else {
-        printf("No path found.\n");
-    }
-
-    return 0;
 }
