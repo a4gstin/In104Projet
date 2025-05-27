@@ -12,6 +12,8 @@
 typedef struct {
     char name[50];
     int index;
+    char* bio;
+    char* school ;
 } User;
 
 // Global variables defined HERE ONLY
@@ -83,6 +85,25 @@ void addFriendship (const char* user, const char* friend, int strength) {
 
     adjacencyMatrix[userIndex][friendIndex] = strength ;
     adjacencyMatrix[friendIndex][userIndex] = strength ;
+}
+
+// F. Implement function to find the average strenght of the freindship of one people
+float findAverageFriendshipStrenght(const char* name) {
+
+    float res ;
+    int friendCount = 0 ;
+    int index = findUserIndex(name);
+
+    for (int i=0; i<userCount; i++) { // the maximum is userCount and not Max_USERS to be more effective 
+        res += adjacencyMatrix[i][index] ;
+        ++ friendCount ;
+    }
+
+    if (friendCount == 0) {
+        return 0 ;
+        printf("triste, tu n'as pas d'ami") ;
+    }
+    return res/friendCount ;
 }
 
 

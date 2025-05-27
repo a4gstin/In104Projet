@@ -15,6 +15,8 @@ void removeFriendship (const char* user, const char* friend) ; //D
 
 void addFriendship (const char* user, const char* friend, int strength) ; //E
 
+float findAverageFriendshipStrenght(const char* name) ; //F
+
 void initializeGraph() ; //1
 
 void addUserWithFriendships(const char* name, int friendCount, const char** friendNames, const int* strengths) ; //2

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 // Import the file p1.h where we declare the functions coded in p1.c
 #include "p1.h"
@@ -139,7 +140,7 @@ int main() {
                         printf("Friend not found.\n");
                     }
                     printf("%d\n",findFriendshipStrength(users[userIndex].name, friendName));
-                    printd("\n");
+                    printf("\n");
                     for(int i=0; i<70; i++){
                     printf("=\n") ;
                     }
@@ -196,7 +197,7 @@ int main() {
                 printf("Voici la liste des personnes du réseau social:\n");
                 int* paths;
                 for (int i = 0; i < userCount; i++) {
-                    printf("Nom : %s, Distance de la relation, %d\n", users[i].name, findShortestPath(userIndex, i, paths));
+                    printf("Nom : %s, Distance de la relation, %d\n", users[i].name, findShortestPath(name, users[i].name, paths));
                 }
 
                 printf("1. Filtre\n");
@@ -334,7 +335,7 @@ int main() {
                     scanf("%s", friendName);
                     int friendIndex = findUserIndex(friendName);
                     
-                    if (adjacencyMatrix[userIndex][friendIndex] =! NO_CONNECTION) {
+                    if (adjacencyMatrix[userIndex][friendIndex] != NO_CONNECTION) {
                         printf("Friend already exists.\n");
 
                     } else {
@@ -375,7 +376,7 @@ int main() {
                     printf("\n");
                     int* friends;
                     int* count;
-                    findPotentialFriends(users[userIndex].name, 2, &friends, &count);
+                    findPotentialFriends(users[userIndex].name, 2, friends, count);
                     if (&count > 0) {
                         printf("Potential friends:\n");
                         for (int i = 0; i < &count; i++) {
@@ -489,4 +490,6 @@ int main() {
         }
     }
     printf("Exiting the social network...\n");
+
+    return 0 ;
 }
