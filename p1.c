@@ -53,10 +53,10 @@ int findFriendshipStrength (const char* name1, const char* name2) {
 
     if (index1 == -1 || index2 == -1) {
         printf("One or both users not found.\n");
-        return ;
+        return -1; 
     }
 
-    return adjacencyMatrix[index1][index2] ;
+    return adjacencyMatrix[index1][index2];
 }
 
 // D. Implement function to remove a friendship betwenn two users
@@ -294,7 +294,7 @@ void exploreAllFriendships(const char* name, int* visited) {
     
     for (int i = 0; i < userCount; i++) {
         if (adjacencyMatrix[userIndex][i] != NO_CONNECTION && !visited[i]) {
-            exploreAllFriendships(i, visited);
+            exploreAllFriendships(users[i].name, visited); // Correction ici
         }
     }
 }
@@ -488,13 +488,13 @@ void aStarWeakestPath(const char* name1, const char* name2) {
 
 // 11. Find connected components (groups) 
 void dfsForComponents(const char* user, int* visited, int* component, int componentId) {
-    int userIndex = findUserName(user) ;
+    int userIndex = findUserIndex(user);
     visited[userIndex] = 1;
     component[userIndex] = componentId;
     
     for (int i = 0; i < userCount; i++) {
         if (adjacencyMatrix[userIndex][i] != NO_CONNECTION && !visited[i]) {
-            dfsForComponents(i, visited, component, componentId);
+            dfsForComponents(users[i].name, visited, component, componentId); // Correction ici
         }
     }
 }
@@ -506,7 +506,7 @@ void findConnectedComponents() {
     
     for (int i = 0; i < userCount; i++) {
         if (!visited[i]) {
-            dfsForComponents(i, visited, component, componentId);
+            dfsForComponents(users[i].name, visited, component, componentId); // Correction ici
             componentId++;
         }
     }
