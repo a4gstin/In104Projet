@@ -290,11 +290,11 @@ void findPotentialFriends(const char* name, int level, int* friends, int* count)
 void exploreAllFriendships(const char* name, int* visited) {
     int userIndex = findUserIndex(name);
     visited[userIndex] = 1;
-    printf("%s ", users[userIndex].name);
+    printf("%s ", users[userIndex].name); // give the name of visited users (test)
     
     for (int i = 0; i < userCount; i++) {
         if (adjacencyMatrix[userIndex][i] != NO_CONNECTION && !visited[i]) {
-            exploreAllFriendships(users[i].name, visited); // Correction ici
+            exploreAllFriendships(users[i].name, visited); // recursive function on the visited friends here
         }
     }
 }
@@ -464,7 +464,7 @@ void aStarWeakestPath(const char* name1, const char* name2) {
         return;
     }
     
-    // Reconstruct path
+    // Reconstruct path (comme )
     int path[MAX_USERS];
     int pathLength = 0;
     int current = end;
@@ -494,7 +494,7 @@ void dfsForComponents(const char* user, int* visited, int* component, int compon
     
     for (int i = 0; i < userCount; i++) {
         if (adjacencyMatrix[userIndex][i] != NO_CONNECTION && !visited[i]) {
-            dfsForComponents(users[i].name, visited, component, componentId); // Correction ici
+            dfsForComponents(users[i].name, visited, component, componentId); // recursive function to explore all friends
         }
     }
 }
