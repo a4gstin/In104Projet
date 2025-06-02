@@ -867,6 +867,7 @@ int main() {
             printf("Invalid choice.\n");
         }
         // Save updates to a new file
+    }
     // Sauvegarde les modifications dans le fichier à la fin du programme
     saveToFile("social_network_updated.txt"); // Sauvegarde tous les utilisateurs et amitiés dans le fichier
     printf("Saving updates into file : social_network_updated.txt\n"); // Message de confirmation de sauvegarde

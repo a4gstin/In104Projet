@@ -1,12 +1,12 @@
-13
+12
 Eric
 No bio information available
 No school information available
 Yves
 No bio information available
 No school information available
-augustin
-ensta
+Lionel
+No bio information available
 No school information available
 John
 No bio information available
@@ -35,10 +35,7 @@ No school information available
 Ibrahim
 No bio information available
 No school information available
-massot
-i love qualite
-No school information available
-15
+14
 0 1 7
 0 2 2
 0 3 5
@@ -49,7 +46,6 @@ No school information available
 2 8 2
 2 11 8
 3 4 9
-5 12 3
 6 7 1
 6 9 8
 6 10 4
